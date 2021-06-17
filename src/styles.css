@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~ngx-toastr/toastr';
+.toast-container {
+  margin-top: 20px;
+}
+
+:root {
+  --mainColor: #f3f5f6;
+  --secondaryColor: #404040;
+  --greenColor: #049650;
+  --brownColor: #a14a20;
+}
+
+.title1 {
+  font-size: 16px;
+  font-family: "Roboto";
+  color: rgb(0, 0, 0)
+}
+
+.title2 {
+  font-size: 14px;
+  font-family: "Roboto";
+  color: rgb(183, 183, 183);
+}
+
+.Text {
+  font-size: 14px;
+  font-family: "Roboto";
+  color: rgb(64, 64, 64);
+}
+
+.Search-Input {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(206, 206, 206);
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), inset 0px 1px 5px 0px rgba(0, 0, 0, 0.06);
+  width: 245px;
+  height: 26px;
+  padding-left: 25px;
+}
+
+.page-link {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(222, 222, 222);
+  border-radius: 3px;
+  background-color: #fff;
+  color: #000;
+  background: -moz-linear-gradient(90deg, rgb(248, 248, 248)0%, rgb(255, 255, 255)100%);
+  background: -webkit-linear-gradient(90deg, rgb(248, 248, 248)0%, rgb(255, 255, 255)100%);
+  background: -ms-linear-gradient(90deg, rgb(248, 248, 248)0%, rgb(255, 255, 255)100%);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03);
+  min-width: 16px;
+  height: 22px;
+  /*---Text--*/
+  font-size: 12px;
+  font-family: "OpenSans";
+  color: rgb(143, 143, 143);
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.004);
+  padding: 5px 10px;
+  margin: 10px 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-item.active .page-link {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(222, 222, 222);
+  border-radius: 3px;
+  background-color: #fff;
+  color: #000;
+  background: -moz-linear-gradient(90deg, rgb(255, 255, 255)0%, rgb(248, 248, 248)100%);
+  background: -webkit-linear-gradient(90deg, rgb(255, 255, 255)0%, rgb(248, 248, 248)100%);
+  background: linear-gradient(90deg, rgb(255, 255, 255)0%, rgb(248, 248, 248)100%);
+  box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.11);
+  min-width: 16px;
+  transform: scale(1.08);
+  transition: all 1s;
+  height: 22px;
+}
+
+.page-link:hover {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(179, 179, 179);
+  border-radius: 3px;
+  background-image: -moz-linear-gradient(90deg, rgb(228, 228, 228)0%, rgb(247, 247, 247)100%);
+  background-image: -webkit-linear-gradient(90deg, rgb(228, 228, 228)0%, rgb(247, 247, 247)100%);
+  background-image: linear-gradient(90deg, rgb(228, 228, 228)0%, rgb(247, 247, 247)100%);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.004);
+  min-width: 16px;
+  height: 22px;
+}
+
+.mainBgColor {
+  background-color: var(--mainColor);
+}
+
+.textGreen {
+  color: var(--greenColor);
+}
+
+.textGray {
+  color: var(--secondaryColor);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.sharpCard {
+  box-shadow: 0px 10px 13px -3px rgb(187 186 186);
+  padding: 5px;
+}

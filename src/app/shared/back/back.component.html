@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-12">
+    <button routerLink="..">
+      BACK
+      <span class="scale">
+        <i class="fas fa-share"></i>
+      </span>
+    </button>
+  </div>
+  <div class="col-12">
+    <app-line></app-line>
+  </div>
+
+  <div class="userData d-md-flex mx-3" *ngIf="userDetails">
+    <div class="usersImg">
+      <img src="../../../assets/Image.svg" class="img-fluid" alt="userImg" />
+    </div>
+    <div class="userInfo my-auto mx-3">
+      <h1 class="title1">
+        {{ userDetails.name }}
+      </h1>
+      <p class="title2 mb-0">
+        {{ userDetails.email }}
+      </p>
+      <p [class]="userDetails.status === 'Active' ? 'textGreen' : 'textGray'">
+        <i class="fas fa-circle"></i> {{ userDetails.status }}
+      </p>
+    </div>
+  </div>
+</div>

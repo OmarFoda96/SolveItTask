@@ -1,0 +1,113 @@
+<app-loader *ngIf="!dataLoaded"></app-loader>
+<div class="sharpCard my-5" *ngIf="dataLoaded">
+  <app-back></app-back>
+  <div class="row mt-4 px-2" *ngIf="user">
+    <div class="col-lg-3 col-md-6 col-12 border-right">
+      <p class="title2 font-weight-bold">
+        <span class="d-block">TOTAL</span> NO. OF POSTS
+      </p>
+      <p class="font-weight-bold text-navy">
+        {{ collectionSize }}
+      </p>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 border-right">
+      <p class="title2 font-weight-bold">
+        <span class="d-block"> CURREENT PAGE </span>
+        NO. OF POSTS
+      </p>
+      <p class="font-weight-bold text-danger">
+        {{ posts.length }}
+      </p>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12 border-right">
+      <p class="title2 font-weight-bold">
+        <span class="d-block"> USER </span>
+        CREATION DATE
+      </p>
+      <p class="font-weight-bold title2">
+        {{ user.created_at | date: "dd-MM-yyyy" }}
+      </p>
+    </div>
+    <div class="col-lg-3 col-md-6 col-12">
+      <p class="title2 font-weight-bold">
+        <span class="d-block"> USER </span>
+        UPDATED DATE
+      </p>
+      <p class="font-weight-bold title2">
+        {{ user.updated_at | date: "dd-MM-yyyy" }}
+      </p>
+    </div>
+  </div>
+  <app-line></app-line>
+  <div class="row">
+    <div class="col-lg-4 col-12">
+      <h3 class="title1">User Posts</h3>
+      <p class="Text" class="title2">Lorem, ipsum dolor sit amet consectetur</p>
+    </div>
+    <div class="col-lg-4 offset-lg-4 mt-auto mb-3 col-12">
+      <span class="title2">
+        Showing {{ posts.length }} of {{ collectionSize }}
+      </span>
+      <select
+        class="select-Input"
+        (change)="getAllposts()"
+        [(ngModel)]="pageSize"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+      <span class="title2"> per page</span>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="posts.length > 0">
+    <app-loader *ngIf="!dataLoaded"></app-loader>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover" *ngIf="dataLoaded">
+        <thead>
+          <tr>
+            <th scope="col" class="title1 w-10">Post ID</th>
+            <th scope="col" class="title1">Post Title</th>
+            <th scope="col" class="title1">Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            (click)="postClicked(item)"
+            class="cursor-pointer"
+            *ngFor="let item of posts"
+          >
+            <td>
+              <p class="Text">
+                {{ item.id }}
+              </p>
+            </td>
+            <td>
+              <p class="Text">
+                {{ item.title }}
+              </p>
+            </td>
+            <td>
+              <p class="Text">
+                {{ item.body }}
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex justify-content-center p-2">
+        <ngb-pagination
+          [collectionSize]="collectionSize"
+          [(page)]="page"
+          [pageSize]="pageSize"
+          [maxSize]="5"
+          (pageChange)="getAllposts()"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+    <h3 *ngIf="posts.length <= 0">Sorry, No comments for this post</h3>
+  </div>
+</div>
