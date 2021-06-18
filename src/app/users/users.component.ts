@@ -13,9 +13,19 @@ export class UsersComponent implements OnInit {
   dataLoaded: boolean = false;
 
   constructor(private service: BaseService, private router: Router) {}
-
+  userSession: UsersInterface[] = JSON.parse(sessionStorage.getItem('users'));
   ngOnInit(): void {
-    this.getAllUsers();
+    sessionStorage.removeItem('posts');
+    sessionStorage.removeItem('comments');
+
+    if (this.userSession) {
+      this.users = this.userSession;
+      this.collectionSize = +sessionStorage.getItem('userCollectionSize');
+      this.pageSize = this.userSession.length;
+      this.dataLoaded = true;
+    } else {
+      this.getAllUsers();
+    }
   }
 
   users: UsersInterface[];
@@ -59,5 +69,11 @@ export class UsersComponent implements OnInit {
   userClicked(id) {
     localStorage.setItem('userId', id);
     this.router.navigate(['/Posts']);
+  }
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    sessionStorage.setItem('users', JSON.stringify(this.users));
+    sessionStorage.setItem('userCollectionSize', '' + this.collectionSize);
   }
 }

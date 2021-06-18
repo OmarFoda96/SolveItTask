@@ -15,9 +15,22 @@ export class PostsComponent implements OnInit {
 
   constructor(private service: BaseService, private router: Router) {}
 
+  postSession: PostsInterface[] = JSON.parse(sessionStorage.getItem('posts'));
+  userDetails: UsersInterface = JSON.parse(localStorage.getItem('userModel'));
   ngOnInit(): void {
-    this.getAllposts();
-    this.getUserDetails();
+    if (this.postSession) {
+      this.posts = this.postSession;
+      this.collectionSize = +sessionStorage.getItem('postsCollectionSize');
+      this.pageSize = this.postSession.length;
+      this.dataLoaded = true;
+    } else {
+      this.getAllposts();
+    }
+    if (this.userDetails) {
+      this.user = this.userDetails;
+    } else {
+      this.getUserDetails();
+    }
   }
 
   posts: PostsInterface[];
@@ -31,6 +44,7 @@ export class PostsComponent implements OnInit {
     this.service.getAllDataById(`users/${this.userId}`).subscribe(
       (data: any) => {
         this.user = data.data;
+        localStorage.setItem('userModel', JSON.stringify(data.data));
       },
       (error) => {
         this.dataLoaded = true;
@@ -62,5 +76,12 @@ export class PostsComponent implements OnInit {
   postClicked(post) {
     localStorage.setItem('post', JSON.stringify(post));
     this.router.navigate(['/Comments']);
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    sessionStorage.setItem('posts', JSON.stringify(this.posts));
+    sessionStorage.setItem('postsCollectionSize', '' + this.collectionSize);
   }
 }
