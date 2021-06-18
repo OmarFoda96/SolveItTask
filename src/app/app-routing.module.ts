@@ -1,3 +1,4 @@
+import { ErrorComponent } from './errors/error/error.component';
 import { CommentsComponent } from './comments/comments.component';
 import { PostsComponent } from './posts/posts.component';
 import { UsersComponent } from './users/users.component';
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'Comments',
         component: CommentsComponent,
+      },
+      {
+        path: 'Error',
+        component: ErrorComponent,
       },
     ],
   },

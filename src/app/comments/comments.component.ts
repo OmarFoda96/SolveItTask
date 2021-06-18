@@ -28,9 +28,8 @@ export class CommentsComponent implements OnInit {
   fullcommentsArray: CommentInterface[];
   getAllcomments() {
     this.dataLoaded = false;
-    this.service
-      .getAllData(`posts/${this.post.id}/comments`)
-      .subscribe((data: ResponseInterface) => {
+    this.service.getAllData(`posts/${this.post.id}/comments`).subscribe(
+      (data: ResponseInterface) => {
         this.collectionSize = data.meta.pagination.total;
         this.dataLoaded = true;
         this.fullcommentsArray = data.data;
@@ -40,6 +39,11 @@ export class CommentsComponent implements OnInit {
             (this.page - 1) * this.pageSize,
             (this.page - 1) * this.pageSize + this.pageSize
           );
-      });
+      },
+      (error) => {
+        this.dataLoaded = true;
+        this.router.navigate(['/Error']);
+      }
+    );
   }
 }

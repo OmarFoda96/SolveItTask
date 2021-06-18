@@ -18,6 +18,7 @@ import { NgbdSortableHeader } from './shared/sortable.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LineComponent } from './shared/line/line.component';
+import { ErrorComponent } from './errors/error/error.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LineComponent } from './shared/line/line.component';
     CommentsComponent,
     NgbdSortableHeader,
     LineComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

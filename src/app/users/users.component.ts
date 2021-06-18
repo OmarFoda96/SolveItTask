@@ -1,9 +1,7 @@
 import { UsersInterface } from './../models/users.interface';
 import { ResponseInterface } from './../models/response.interface';
 import { BaseService } from './../services/base.service';
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Observable } from 'rxjs';
-import { NgbdSortableHeader } from '../shared/sortable.directive';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,17 +26,23 @@ export class UsersComponent implements OnInit {
 
   getAllUsers() {
     this.dataLoaded = false;
-    this.service.getAllData('users').subscribe((data: ResponseInterface) => {
-      this.collectionSize = data.meta.pagination.total;
-      this.dataLoaded = true;
-      this.fullUsersArray = data.data;
-      this.users = data.data
-        .map((user, i) => ({ id: i + 1, ...user }))
-        .slice(
-          (this.page - 1) * this.pageSize,
-          (this.page - 1) * this.pageSize + this.pageSize
-        );
-    });
+    this.service.getAllData('users').subscribe(
+      (data: ResponseInterface) => {
+        this.collectionSize = data.meta.pagination.total;
+        this.dataLoaded = true;
+        this.fullUsersArray = data.data;
+        this.users = data.data
+          .map((user, i) => ({ id: i + 1, ...user }))
+          .slice(
+            (this.page - 1) * this.pageSize,
+            (this.page - 1) * this.pageSize + this.pageSize
+          );
+      },
+      (error) => {
+        this.dataLoaded = true;
+        this.router.navigate(['/Error']);
+      }
+    );
   }
   search(e) {
     if (e.target.value != '') {

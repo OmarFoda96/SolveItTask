@@ -28,17 +28,20 @@ export class PostsComponent implements OnInit {
   collectionSize = 0;
   fullpostsArray: PostsInterface[];
   getUserDetails() {
-    this.service
-      .getAllDataById(`users/${this.userId}`)
-      .subscribe((data: any) => {
+    this.service.getAllDataById(`users/${this.userId}`).subscribe(
+      (data: any) => {
         this.user = data.data;
-      });
+      },
+      (error) => {
+        this.dataLoaded = true;
+        this.router.navigate(['/Error']);
+      }
+    );
   }
   getAllposts() {
     this.dataLoaded = false;
-    this.service
-      .getAllData(`users/${this.userId}/posts`)
-      .subscribe((data: ResponseInterface) => {
+    this.service.getAllData(`users/${this.userId}/posts`).subscribe(
+      (data: ResponseInterface) => {
         this.collectionSize = data.meta.pagination.total;
         this.dataLoaded = true;
         this.fullpostsArray = data.data;
@@ -48,7 +51,12 @@ export class PostsComponent implements OnInit {
             (this.page - 1) * this.pageSize,
             (this.page - 1) * this.pageSize + this.pageSize
           );
-      });
+      },
+      (error) => {
+        this.dataLoaded = true;
+        this.router.navigate(['/Error']);
+      }
+    );
   }
 
   postClicked(post) {
